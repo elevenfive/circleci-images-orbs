@@ -1,0 +1,4 @@
+version: 2.1
+
+description: >
+  A variety of tools for using/extending CircleCI's convenience images
