@@ -25,6 +25,18 @@ jobs:
       - circleci-images/install-android-ndk:
           ndk-version: <<parameters.ndk-version>>
 
+integration-dev_filters: &integration-dev_filters
+  branches:
+    ignore: /.*/
+  tags:
+    only: /integration-.*/
+
+integration-master_filters: &integration-master_filters
+  branches:
+    ignore: /.*/
+  tags:
+    only: /master-.*/
+
 prod-deploy_requires: &prod-deploy_requires
   [17c-23-master, 17c-24-master, 17c-25-master, 17c-26-master, 17c-27-master, 17c-28-master, 18b-23-master, 18b-24-master, 18b-25-master, 18b-26-master, 18b-27-master, 18b-28-master, 19c-23-master, 19c-24-master, 19c-25-master, 19c-26-master, 19c-27-master, 19c-28-master]
 
@@ -72,93 +84,111 @@ workflows:
           name: 17c-23-dev
           tag: api-23
           ndk-version: android-ndk-r17c
+          filters: *integration-dev_filters
 
       - android:
           name: 17c-24-dev
           tag: api-24
           ndk-version: android-ndk-r17c
+          filters: *integration-dev_filters
 
       - android:
           name: 17c-25-dev
           tag: api-25
           ndk-version: android-ndk-r17c
+          filters: *integration-dev_filters
 
       - android:
           name: 17c-26-dev
           tag: api-26
           ndk-version: android-ndk-r17c
+          filters: *integration-dev_filters
 
       - android:
           name: 17c-27-dev
           tag: api-27
           ndk-version: android-ndk-r17c
+          filters: *integration-dev_filters
 
       - android:
           name: 17c-28-dev
           tag: api-28
           ndk-version: android-ndk-r17c
+          filters: *integration-dev_filters
 
       # 18b
       - android:
           name: 18b-23-dev
           tag: api-23
           ndk-version: android-ndk-r18b
+          filters: *integration-dev_filters
 
       - android:
           name: 18b-24-dev
           tag: api-24
           ndk-version: android-ndk-r18b
+          filters: *integration-dev_filters
 
       - android:
           name: 18b-25-dev
           tag: api-25
           ndk-version: android-ndk-r18b
+          filters: *integration-dev_filters
 
       - android:
           name: 18b-26-dev
           tag: api-26
           ndk-version: android-ndk-r18b
+          filters: *integration-dev_filters
 
       - android:
           name: 18b-27-dev
           tag: api-27
           ndk-version: android-ndk-r18b
+          filters: *integration-dev_filters
 
       - android:
           name: 18b-28-dev
           tag: api-28
           ndk-version: android-ndk-r18b
+          filters: *integration-dev_filters
 
       # 19c
       - android:
           name: 19c-23-dev
           tag: api-23
           ndk-version: android-ndk-r19c
+          filters: *integration-dev_filters
 
       - android:
           name: 19c-24-dev
           tag: api-24
           ndk-version: android-ndk-r19c
+          filters: *integration-dev_filters
 
       - android:
           name: 19c-25-dev
           tag: api-25
           ndk-version: android-ndk-r19c
+          filters: *integration-dev_filters
 
       - android:
           name: 19c-26-dev
           tag: api-26
           ndk-version: android-ndk-r19c
+          filters: *integration-dev_filters
 
       - android:
           name: 19c-27-dev
           tag: api-27
           ndk-version: android-ndk-r19c
+          filters: *integration-dev_filters
 
       - android:
           name: 19c-28-dev
           tag: api-28
           ndk-version: android-ndk-r19c
+          filters: *integration-dev_filters
 
       # triggered by master branch commits
       # 17c
@@ -166,93 +196,111 @@ workflows:
           name: 17c-23-master
           tag: api-23
           ndk-version: android-ndk-r17c
+          filters: *integration-master_filters
 
       - android:
           name: 17c-24-master
           tag: api-24
           ndk-version: android-ndk-r17c
+          filters: *integration-master_filters
 
       - android:
           name: 17c-25-master
           tag: api-25
           ndk-version: android-ndk-r17c
+          filters: *integration-master_filters
 
       - android:
           name: 17c-26-master
           tag: api-26
           ndk-version: android-ndk-r17c
+          filters: *integration-master_filters
 
       - android:
           name: 17c-27-master
           tag: api-27
           ndk-version: android-ndk-r17c
+          filters: *integration-master_filters
 
       - android:
           name: 17c-28-master
           tag: api-28
           ndk-version: android-ndk-r17c
+          filters: *integration-master_filters
 
       # 18b
       - android:
           name: 18b-23-master
           tag: api-23
           ndk-version: android-ndk-r18b
+          filters: *integration-master_filters
 
       - android:
           name: 18b-24-master
           tag: api-24
           ndk-version: android-ndk-r18b
+          filters: *integration-master_filters
 
       - android:
           name: 18b-25-master
           tag: api-25
           ndk-version: android-ndk-r18b
+          filters: *integration-master_filters
 
       - android:
           name: 18b-26-master
           tag: api-26
           ndk-version: android-ndk-r18b
+          filters: *integration-master_filters
 
       - android:
           name: 18b-27-master
           tag: api-27
           ndk-version: android-ndk-r18b
+          filters: *integration-master_filters
 
       - android:
           name: 18b-28-master
           tag: api-28
           ndk-version: android-ndk-r18b
+          filters: *integration-master_filters
 
       # 19c
       - android:
           name: 19c-23-master
           tag: api-23
           ndk-version: android-ndk-r19c
+          filters: *integration-master_filters
 
       - android:
           name: 19c-24-master
           tag: api-24
           ndk-version: android-ndk-r19c
+          filters: *integration-master_filters
 
       - android:
           name: 19c-25-master
           tag: api-25
           ndk-version: android-ndk-r19c
+          filters: *integration-master_filters
 
       - android:
           name: 19c-26-master
           tag: api-26
           ndk-version: android-ndk-r19c
+          filters: *integration-master_filters
 
       - android:
           name: 19c-27-master
           tag: api-27
           ndk-version: android-ndk-r19c
+          filters: *integration-master_filters
 
       - android:
           name: 19c-28-master
           tag: api-28
           ndk-version: android-ndk-r19c
+          filters: *integration-master_filters
 
       # patch, minor, or major publishing
       - orb-tools/dev-promote-prod:
