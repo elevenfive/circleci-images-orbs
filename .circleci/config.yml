@@ -24,6 +24,9 @@ jobs:
       - circleci-images/install-android-ndk:
           ndk-version: <<parameters.ndk-version>>
 
+prod-deploy_requires: &prod-deploy_requires
+  [17c-23-master, 17c-24-master, 17c-25-master, 17c-26-master, 17c-27-master, 17c-28-master, 18b-23-master, 18b-24-master, 18b-25-master, 18b-26-master, 18b-27-master, 18b-28-master, 19c-23-master, 19c-24-master, 19c-25-master, 19c-26-master, 19c-27-master, 19c-28-master]
+
 workflows:
   lint_pack-validate_publish-dev:
     jobs:
@@ -155,3 +158,133 @@ workflows:
           name: 19c-28-dev
           tag: api-28
           ndk-version: android-ndk-r19c
+
+      # triggered by master branch commits
+      # 17c
+      - android:
+          name: 17c-23-master
+          tag: api-23
+          ndk-version: android-ndk-r17c
+
+      - android:
+          name: 17c-24-master
+          tag: api-24
+          ndk-version: android-ndk-r17c
+
+      - android:
+          name: 17c-25-master
+          tag: api-25
+          ndk-version: android-ndk-r17c
+
+      - android:
+          name: 17c-26-master
+          tag: api-26
+          ndk-version: android-ndk-r17c
+
+      - android:
+          name: 17c-27-master
+          tag: api-27
+          ndk-version: android-ndk-r17c
+
+      - android:
+          name: 17c-28-master
+          tag: api-28
+          ndk-version: android-ndk-r17c
+
+      # 18b
+      - android:
+          name: 18b-23-master
+          tag: api-23
+          ndk-version: android-ndk-r18b
+
+      - android:
+          name: 18b-24-master
+          tag: api-24
+          ndk-version: android-ndk-r18b
+
+      - android:
+          name: 18b-25-master
+          tag: api-25
+          ndk-version: android-ndk-r18b
+
+      - android:
+          name: 18b-26-master
+          tag: api-26
+          ndk-version: android-ndk-r18b
+
+      - android:
+          name: 18b-27-master
+          tag: api-27
+          ndk-version: android-ndk-r18b
+
+      - android:
+          name: 18b-28-master
+          tag: api-28
+          ndk-version: android-ndk-r18b
+
+      # 19c
+      - android:
+          name: 19c-23-master
+          tag: api-23
+          ndk-version: android-ndk-r19c
+
+      - android:
+          name: 19c-24-master
+          tag: api-24
+          ndk-version: android-ndk-r19c
+
+      - android:
+          name: 19c-25-master
+          tag: api-25
+          ndk-version: android-ndk-r19c
+
+      - android:
+          name: 19c-26-master
+          tag: api-26
+          ndk-version: android-ndk-r19c
+
+      - android:
+          name: 19c-27-master
+          tag: api-27
+          ndk-version: android-ndk-r19c
+
+      - android:
+          name: 19c-28-master
+          tag: api-28
+          ndk-version: android-ndk-r19c
+
+      # patch, minor, or major publishing
+      - orb-tools/dev-promote-prod:
+          name: dev-promote-patch
+          context: orb-publishing
+          orb-name: circleci/circleci-images
+          requires: *prod-deploy_requires
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /master-patch.*/
+
+      - orb-tools/dev-promote-prod:
+          name: dev-promote-minor
+          context: orb-publishing
+          orb-name: circleci/circleci-images
+          release: minor
+          requires: *prod-deploy_requires
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /master-minor.*/
+
+      - orb-tools/dev-promote-prod:
+          name: dev-promote-major
+          context: orb-publishing
+          orb-name: circleci/circleci-images
+          release: major
+          requires: *prod-deploy_requires
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /master-major.*/
