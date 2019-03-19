@@ -1,0 +1,22 @@
+description: >
+  Extend CircleCI's Android convenience images by installing a version
+  of the Android NDK of your choice.
+
+parameters:
+  ndk-version:
+    type: string
+    default: android-ndk-r17b
+    description: >
+      Version of the NDK to install. Provide a string formatted along
+      the lines of the default value.
+
+steps:
+  - run:
+      name: Install Android NDK
+      command: |
+        curl --silent --show-error --location --fail --retry 3 \
+          --output /tmp/<<parameters.ndk-version>>.zip \
+          https://dl.google.com/android/repository/<<parameters.ndk-version>>-linux-x86_64.zip && \
+            sudo unzip -q /tmp/<<parameters.ndk-version>>.zip -d /opt/android && \
+            rm /tmp/<<parameters.ndk-version>>.zip && \
+            sudo chown -R circleci:circleci /opt/android/<<parameters.ndk-version>>

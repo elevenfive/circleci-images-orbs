@@ -1,0 +1,41 @@
+version: 2.1
+
+orbs:
+  orb-tools: circleci/orb-tools@8.4.0
+  circleci-images: circleci/circleci-images@dev:alpha
+
+  workflows:
+    lint_pack-validate_publish-dev:
+      jobs:
+        - orb-tools/lint
+
+        - orb-tools/pack:
+            requires:
+              - orb-tools/lint
+
+        - orb-tools/publish-dev:
+            orb-name: circleci/circleci-images
+            context: orb-publishing
+            requires:
+              - orb-tools/pack
+
+        - orb-tools/trigger-integration-workflow:
+            name: trigger-integration-dev
+            context: orb-publishing
+            ssh-fingerprints: c7:36:9a:0e:3b:cb:ed:6c:bb:a8:93:69:62:50:59:db
+            requires:
+              - orb-tools/publish-dev
+            filters:
+              branches:
+                ignore: master
+
+        - orb-tools/trigger-integration-workflow:
+            name: trigger-integration-master
+            context: orb-publishing
+            ssh-fingerprints: c7:36:9a:0e:3b:cb:ed:6c:bb:a8:93:69:62:50:59:db
+            tag: master
+            requires:
+              - orb-tools/publish-dev
+            filters:
+              branches:
+                only: master
