@@ -4,6 +4,26 @@ orbs:
   orb-tools: circleci/orb-tools@8.4.0
   circleci-images: circleci/circleci-images@dev:alpha
 
+jobs:
+  android:
+    parameters:
+      tag:
+        type: string
+        description: circleci/android tag
+
+      ndk-version:
+        type: string
+        description: ndk version to install
+
+    docker:
+      - image: circleci/android:<<parameters.tag>>
+
+    steps:
+      - checkout
+
+      - circleci-images/install-android-ndk:
+          ndk-version: <<parameters.ndk-version>>
+
 workflows:
   lint_pack-validate_publish-dev:
     jobs:
@@ -39,3 +59,99 @@ workflows:
           filters:
             branches:
               only: master
+
+  integration-tests_prod-release:
+    jobs:
+      # triggered by non-master branch commits
+      # 17c
+      - android:
+          name: 17c-23-dev
+          tag: api-23
+          ndk-version: android-ndk-r17c
+
+      - android:
+          name: 17c-24-dev
+          tag: api-24
+          ndk-version: android-ndk-r17c
+
+      - android:
+          name: 17c-25-dev
+          tag: api-25
+          ndk-version: android-ndk-r17c
+
+      - android:
+          name: 17c-26-dev
+          tag: api-26
+          ndk-version: android-ndk-r17c
+
+      - android:
+          name: 17c-27-dev
+          tag: api-27
+          ndk-version: android-ndk-r17c
+
+      - android:
+          name: 17c-28-dev
+          tag: api-28
+          ndk-version: android-ndk-r17c
+
+      # 18b
+      - android:
+          name: 18b-23-dev
+          tag: api-23
+          ndk-version: android-ndk-r18b
+
+      - android:
+          name: 18b-24-dev
+          tag: api-24
+          ndk-version: android-ndk-r18b
+
+      - android:
+          name: 18b-25-dev
+          tag: api-25
+          ndk-version: android-ndk-r18b
+
+      - android:
+          name: 18b-26-dev
+          tag: api-26
+          ndk-version: android-ndk-r18b
+
+      - android:
+          name: 18b-27-dev
+          tag: api-27
+          ndk-version: android-ndk-r18b
+
+      - android:
+          name: 18b-28-dev
+          tag: api-28
+          ndk-version: android-ndk-r18b
+
+      # 19c
+      - android:
+          name: 19c-23-dev
+          tag: api-23
+          ndk-version: android-ndk-r19c
+
+      - android:
+          name: 19c-24-dev
+          tag: api-24
+          ndk-version: android-ndk-r19c
+
+      - android:
+          name: 19c-25-dev
+          tag: api-25
+          ndk-version: android-ndk-r19c
+
+      - android:
+          name: 19c-26-dev
+          tag: api-26
+          ndk-version: android-ndk-r19c
+
+      - android:
+          name: 19c-27-dev
+          tag: api-27
+          ndk-version: android-ndk-r19c
+
+      - android:
+          name: 19c-28-dev
+          tag: api-28
+          ndk-version: android-ndk-r19c
