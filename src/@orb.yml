@@ -1,4 +1,5 @@
 version: 2.1
 
 description: >
-  A variety of tools for using/extending CircleCI's convenience images
+  A variety of tools for using/extending CircleCI's convenience images.
+  View this orb's source: https://github.com/cci-orbs/circleci-images
