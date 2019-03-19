@@ -15,6 +15,7 @@ jobs:
         type: string
         description: ndk version to install
 
+    resource_class: small
     docker:
       - image: circleci/android:<<parameters.tag>>
 
