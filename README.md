@@ -27,7 +27,7 @@ jobs:
         ndk-version: android-ndk-r19c
 ```
 
-The only required parameter is `ndk-version`. Any version can be passed; however, the orb is only tested against [CircleCI's Android images](https://hub.docker.com/r/circleci/android) with versions `17c`, `18b`, and `19c`.
+There are two required parameters: `ndk-version` and `ndk-sha-1`. Any version and checksum can be passed; however, the orb is only tested against [CircleCI's Android images](https://hub.docker.com/r/circleci/android) with versions `17c`, `18b`, and `19c`.  The list of official SHA-1 checksums is available at: https://developer.android.com/ndk/downloads.
 
 ## Contributing
 
