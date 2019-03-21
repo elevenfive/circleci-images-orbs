@@ -9,7 +9,8 @@ parameters:
     description: >
       Version of the NDK to install. Provide a string formatted along
       the lines of the default value.
-  ndk-sha-1:
+      
+  ndk-sha:
     type: string
     default: fd94d0be6017c6acbd193eb95e09cf4b6f61b834
     description: >
@@ -23,7 +24,7 @@ steps:
         curl --silent --show-error --location --fail --retry 3 \
           --output /tmp/<<parameters.ndk-version>>.zip \
           https://dl.google.com/android/repository/<<parameters.ndk-version>>-linux-x86_64.zip && \
-          echo "<<parameters.ndk-sha-1>>  /tmp/<<parameters.ndk-version>>.zip" > /tmp/<<parameters.ndk-version>>.zip.sha1 && \
+          echo "<<parameters.ndk-sha>>  /tmp/<<parameters.ndk-version>>.zip" > /tmp/<<parameters.ndk-version>>.zip.sha1 && \
           sha1sum -c /tmp/<<parameters.ndk-version>>.zip.sha1 && \
           sudo unzip -q /tmp/<<parameters.ndk-version>>.zip -d /opt/android && \
           rm /tmp/<<parameters.ndk-version>>.zip && \
