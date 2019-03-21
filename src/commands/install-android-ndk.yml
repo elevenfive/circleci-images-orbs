@@ -19,6 +19,5 @@ steps:
           https://dl.google.com/android/repository/<<parameters.ndk-version>>-linux-x86_64.zip && \
           sudo unzip -q /tmp/<<parameters.ndk-version>>.zip -d /opt/android && \
           rm /tmp/<<parameters.ndk-version>>.zip && \
-          sudo chown -R circleci:circleci /opt/android/<<parameters.ndk-version>>
-
-        export ANDROID_NDK_HOME=/opt/android/<<parameters.ndk-version>>
+          sudo chown -R circleci:circleci /opt/android/<<parameters.ndk-version>> && \
+          export ANDROID_NDK_HOME=/opt/android/<<parameters.ndk-version>>
